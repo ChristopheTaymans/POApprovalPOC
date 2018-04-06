@@ -1,0 +1,62 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+                         xmlns:f="sap.ui.layout.form"
+                         xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <Dialog stretch="false" title="{i18n>FILTER}">
+    <customHeader>
+      <Toolbar>
+        <content>
+          <ToolbarSpacer/>
+          <Title text="{i18n>FILTER}" class="sapUiTinyMargin" />
+          <ToolbarSpacer/>
+          <Button id="btnFilter" icon="sap-icon://refresh" press="onFilterRefreshButtonPressed" />
+        </content>
+      </Toolbar>
+    </customHeader>
+    <content>
+         <f:SimpleForm labelSpanL="4" labelSpanM="4"
+                        emptySpanL="0" emptySpanM="0"
+                        columnsL="2" columnsM="2"
+                        minWidth="1024"
+                        maxContainerCols="2"
+                        editable="true"
+                        layout="ResponsiveGridLayout">
+          <f:content>
+          <Label text="{i18n>COMPANY}" class="extraPaddingTop" visible="{filters>/filters/company/visible}"/>
+          <Select selectedKey="{filters>/filters/company/key}" change="onSelectValueChanged"
+						app:keyProperty="{filters>/filters/company/keyProperty}" visible="{filters>/filters/company/visible}" width="100%"
+						items="{ path: 'filters>/filters/company/entries', sorter: { path: 'value' } }">
+            <core:Item key="{filters>key}" text="{filters>value}"/>
+          </Select>
+
+          <Label text="{i18n>SUPPLIER}" class="extraPaddingTop" visible="{filters>/filters/supplier/visible}"/>
+          <Select selectedKey="{filters>/filters/supplier/key}" change="onSelectValueChanged"
+						app:keyProperty="{filters>/filters/supplier/keyProperty}" visible="{filters>/filters/supplier/visible}" width="100%"
+						items="{ path: 'filters>/filters/supplier/entries', sorter: { path: 'value' } }">
+            <core:Item key="{filters>key}" text="{filters>value}"/>
+          </Select>
+
+         <Label text="{i18n>REQUESTER}" class="extraPaddingTop" visible="{filters>/filters/requester/visible}"/>
+          <Select selectedKey="{filters>/filters/requester/key}" change="onSelectValueChanged"
+						app:keyProperty="{filters>/filters/requester/keyProperty}" visible="{filters>/filters/requester/visible}" width="100%"
+						items="{ path: 'filters>/filters/requester/entries', sorter: { path: 'value' } }">
+            <core:Item key="{filters>key}" text="{filters>value}"/>
+          </Select>          
+          
+
+          <Label class="extraPaddingTop" text="{i18n>POID}" />
+          <Input width="100%" value="{filters>/valueSearch/poIdSearch/valueLow}" /> 
+          
+          <Label class="extraPaddingTop" text="{i18n>PRICE}" />
+          <Input width="100%" value="{filters>/valueSearch/priceSearch/valueLow}" />
+          <Input width="100%" value="{filters>/valueSearch/priceSearch/valueHigh}" />
+          </f:content>
+        </f:SimpleForm>       
+    </content>
+    <beginButton>
+      <Button id="btnOkSearch" text="{i18n>OK}" press="onFilterOkButtonPressed" />
+    </beginButton>
+    <endButton>
+      <Button id="btnCanceltSearch" text="{i18n>CANCEL}" press="onFilterCancelButtonPressed" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

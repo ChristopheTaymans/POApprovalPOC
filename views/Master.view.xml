@@ -1,0 +1,58 @@
+<mvc:View controllerName="be.infrabel.poapproval.controllers.Master" busy="{appView>/busy}" busyIndicatorDelay="{appView>/delay}"
+  displayBlock="true" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" >
+  <semantic:MasterPage title="{i18n>MASTER_TITLE} ({Info>/actualCount}/{Info>/totalCount})" id="page" showHeader="true">
+    <semantic:subHeader>
+      <Toolbar id="searchBar">
+        <SearchField id="searchSupplier" liveChange="onSupplierSearch" width="100%" showRefreshButton="true" showSearchButton="false"
+          search="handleRefresh" placeholder="{i18n>SEARCHSUPPLIER}" />
+        <ToolbarSpacer />
+        <Button id="refresh" visible="{= ${DEVICE>/support/touch} === true ? false : true  }" press="handleRefresh" icon="sap-icon://refresh"
+        />
+      </Toolbar>
+    </semantic:subHeader>
+
+    <semantic:content>
+      <PullToRefresh id="pullToRefresh" visible="{DEVICE>/support/touch}" refresh="handleRefresh" />
+
+      <List id="lstPO" items="{
+							path: 'WI>/',
+							sorter: [
+								{
+									path: 'Ebeln',
+									descending: false						
+								}
+							]
+						}" busyIndicatorDelay="10" mode="SingleSelectMaster" growing="true" growingThreshold="20" growingScrollToLoad="true"
+        itemPress="_onItemPress" updateFinished="_onListUpdateFinished">
+
+        <items>
+          <ObjectListItem intro="{WI>Ebeln}" title="{WI>Name1}" number="{
+								path: 'WI>Netwr',
+								type: 'sap.ui.model.type.Float',  
+		   						formatOptions: {  
+		   							groupingEnabled: true,
+		   							decimals: 2,
+		   							groupingSeparator : '.',
+		   							decimalSeparator : ','
+		   						}
+						     }" numberUnit="{WI>Waers}" type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">
+            <attributes>
+              <ObjectAttribute text="{WI>ItemNbr} items(s)" />
+              <ObjectAttribute title="{i18n>REQUESTER}" text="{WI>TitleP} {WI>Fullname}" />
+            </attributes>
+            <firstStatus>
+              <ObjectStatus text="{
+			        						path : 'WI>Aedat',
+			        						type: 'sap.ui.model.type.Date',
+			        						formatOptions:{pattern: 'dd/MM/yyyy'}
+			        					}" />
+            </firstStatus>
+          </ObjectListItem>
+        </items>
+      </List>
+    </semantic:content>
+    <semantic:filter>
+    <semantic:FilterAction id="filterButton" press="onFilterPressed"/>
+    </semantic:filter>
+  </semantic:MasterPage>
+</mvc:View>

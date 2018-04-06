@@ -1,0 +1,143 @@
+{
+	"sap.app": {
+		"id": "be.infrabel.poapproval",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/Z_IM2_PO_APPROVAL_ODATA_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "be.infrabel.poapproval.views.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.38.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "be.infrabel.poapproval.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"defaultBindingMode": "TwoWay",
+					"useBatch": false,
+					"tokenHandling": true,
+					"json": true
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "be.infrabel.poapproval.views",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": [
+						"masterTarget",
+						"noData"
+					]
+				}
+			},
+			"routes": [{
+					"pattern": "",
+					"name": "initialRoute",
+					"target": [
+						"noData",
+						"masterTarget"
+					]
+				}, {
+					"pattern": "order/{path}",
+					"name": "detailRoute",
+					"target": ["masterTarget",
+						"detailTarget"
+					]
+				},
+				{
+					"pattern": "success/{PoId}",
+					"name": "successRoute",
+					"target": [
+						"noData",
+						"masterTarget"
+					]
+				}
+
+			],
+			"targets": {
+				"masterTarget": {
+
+					"viewName": "Master",
+					"viewId": "vwMaster",
+					"controlAggregation": "masterPages",
+					"viewLevel": 1
+				},
+				"detailTarget": {
+				
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2
+				},
+				"noData": {				
+				
+					"viewName": "NoData",
+					"viewId": "vwNoData",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2
+				}
+			}			
+		}
+	}
+}

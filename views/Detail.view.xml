@@ -1,0 +1,99 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	controllerName="be.infrabel.poapproval.controllers.Detail">
+	<semantic:DetailPage  id="page" title="{i18n>DETAIL_TITLE}" showNavButton="{DEVICE>/system/phone}" navButtonPress="onNavButtonPress" class="MasterButton">
+		<semantic:content>
+			<ObjectListItem title="{Name1}"
+				number="{ path: 'Netwr', type: 'sap.ui.model.type.Float', formatOptions: { groupingEnabled: true, decimals: 2, groupingSeparator : '.', decimalSeparator : ',' } }"
+				numberUnit="{Waers}">
+				<attributes>
+					<ObjectAttribute title="{i18n>REQUESTER}" text="{TitleP} {Fullname}"/>
+				</attributes>
+				<firstStatus>
+					<ObjectStatus text="{ path : 'Aedat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy'} }"/>
+				</firstStatus>
+			</ObjectListItem>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint">
+						<content>
+							<VBox class="sapUiSmallMargin">
+								<f:SimpleForm minWidth="1024" maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3"
+									emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+									<f:content >
+										<Label text="{i18n>PURCHASEORDERID}"/>
+										<Text text="{Ebeln}"/>
+										<Label text="{i18n>DOCDATE}"/>
+										<Text text="{ path : 'Aedat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy'} }"/>
+										<Label text="{i18n>DOCTYPE}"/>
+										<Text text="{Batxt} ({Bsart})"/>
+										<Label text="{i18n>PAYMENTTERM}"/>
+										<Text text="{Ztext} ({Zterm})"/>
+										<Label text="{i18n>PURCHORG}"/>
+										<Text text="{Ekotx} ({Ekorg})"/>
+										<Label text="{i18n>PURCHGRP}"/>
+										<Text text="{Eknam} ({Ekgrp})"/>
+										<Label text="{i18n>COMPANY}"/>
+										<Text text="{Butxt} ({Bukrs})"/>
+									</f:content>
+								</f:SimpleForm>
+							</VBox>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://comment">
+						<TextArea id="textArea" placeholder="{i18n>COMMENTS_PLACEHOLDER}" rows="8" cols="132" wrapping="hard"/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<Table id="lineItemsList" width="auto" items="{POItemSet/}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="Items({ItemNbr})"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>DESCRIPTION}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="{i18n>QUANTITY}"/>
+					</Column>
+					<Column id="__column2" hAlign="End">
+						<header>
+							<Text text="{i18n>PRICE}" maxLines="0" id="__text12"/>
+						</header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{Txz01}" id="__identifier0"/>
+							<ObjectNumber
+								number="{ path: 'Menge', type: 'sap.ui.model.type.Float', formatOptions: { groupingEnabled: true, decimals: 2, groupingSeparator : '.', decimalSeparator : ',' } }"
+								unit="{Meins}"/>
+							<ObjectNumber
+								number="{ path: 'Netwr', type: 'sap.ui.model.type.Float', formatOptions: { groupingEnabled: true, decimals: 2, groupingSeparator : '.', decimalSeparator : ',' } }"
+								unit="€" textAlign="Right" id="__number1"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+		
+    <semantic:positiveAction>
+    <semantic:PositiveAction text="Accept" press="onAccept"/>
+    </semantic:positiveAction>
+    <semantic:negativeAction>
+    <semantic:NegativeAction text="Reject" press="onReject"/>
+    </semantic:negativeAction>    
+
+    
+<!-- 		<footer> -->
+<!-- 			<Toolbar> -->
+<!-- 				<ToolbarSpacer/> -->
+<!-- 				<Button text="Accept" type="Accept" press="onAccept"/> -->
+<!-- 				<Button text="Reject" type="Reject" press="onReject"/> -->
+<!-- 			</Toolbar> -->
+<!-- 		</footer> -->
+	</semantic:DetailPage>
+</mvc:View>

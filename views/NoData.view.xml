@@ -1,0 +1,13 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<MessagePage
+			title="{i18n>DETAIL_TITLE}" titleLevel="H2"
+			text="{i18n>NODATA}"
+			description="{i18n>NODATA_DESCRIPTION}">
+	</MessagePage>	
+
+</mvc:View>

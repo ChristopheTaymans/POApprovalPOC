@@ -1,0 +1,10 @@
+<mvc:View 
+    controllerName="be.infrabel.poapproval.controllers.App"
+    busy="{appView>/busy}"
+    busyIndicatorDelay="{appView>/delay}"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc">
+	<SplitApp 
+        id="idAppControl" />        
+</mvc:View>
